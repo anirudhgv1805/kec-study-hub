@@ -9,7 +9,6 @@ import React, { ReactNode, useEffect, useState } from "react";
 import app from "../firebase/firebase";
 import { User } from "../types/User";
 import { AuthContext } from "./AuthContext";
-import { useNavigate } from "react-router-dom";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -17,7 +16,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const db = getFirestore(app);
-
+  // @ts-ignore
   const [jwtToken, setJwtToken] = useState<string | null>(
     localStorage.getItem("jwtToken")
   );
@@ -25,7 +24,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
+  // @ts-ignore
   const [loading, setLoading] = useState<boolean>(true);
+  // @ts-ignore
   const [error, setError] = useState<string | null>(null);
 
   // const axiosInstance = useAxiosInstance();

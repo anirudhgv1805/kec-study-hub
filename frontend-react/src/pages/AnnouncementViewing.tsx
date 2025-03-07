@@ -18,7 +18,7 @@ export const AnnouncementViewing: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleLike = async (id: string, currentLikes: number) => {
+  const handleLike = async (id: string, _currentLikes: number) => {
     if (user?.uid) {
       await updateLikes(id, user.uid);
     }
