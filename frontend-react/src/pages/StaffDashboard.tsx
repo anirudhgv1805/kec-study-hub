@@ -1,20 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import UserProfile from "../components/UserProfile";
-import { useAuth } from "../context/AuthContext";
 import NavigateButton from "../components/NavigateButton";
+import UserProfile from "../components/UserProfile";
 
 export const StaffDashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
 
   const handleAnnouncementPostingClick = () => {
     navigate("/announcement-posting");
   };
 
   const handleLogoutClick = () => {
-    logout();
-    navigate("/");
+    navigate("/logout");
   };
 
   return (

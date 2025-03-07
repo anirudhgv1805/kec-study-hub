@@ -1,15 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import UserProfile from "../components/UserProfile";
-import { useAuth } from "../context/AuthContext";
 import NavigateButton from "../components/NavigateButton";
+import UserProfile from "../components/UserProfile";
 
 export const StudentDashboard: React.FC = () => {
-  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    logout();
+    navigate("/logout");
   };
 
   const handleViewAnnouncementsClick = () => {
