@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import UserProfile from "../components/UserProfile";
 import { useAuth } from "../context/AuthContext";
+import NavigateButton from "../components/NavigateButton";
 
 export const StudentDashboard: React.FC = () => {
   const { logout } = useAuth();
@@ -18,7 +19,9 @@ export const StudentDashboard: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold text-center mb-6">Student Dashboard</h1>
+        <h1 className="text-3xl font-bold text-center mb-6">
+          Student Dashboard
+        </h1>
         <UserProfile />
         <div className="mt-6 flex justify-center space-x-4">
           <button
@@ -33,6 +36,7 @@ export const StudentDashboard: React.FC = () => {
           >
             View Announcements
           </button>
+          <NavigateButton label="View Notes" to="/notes-view" />
         </div>
       </div>
     </div>

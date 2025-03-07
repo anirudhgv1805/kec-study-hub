@@ -7,6 +7,7 @@ import { StaffDashboard } from "./pages/StaffDashboard";
 import AnnouncementPosting from "./pages/AnnouncementPosting";
 import { Logout } from "./pages/Logout";
 import { AnnouncementViewing } from "./pages/AnnouncementViewing";
+import NotesView from "./pages/NotesView";
 
 export const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ export const App: React.FC = () => {
         <Route path="/announcement-posting" element={<AnnouncementPosting />} />
         <Route path="/announcement-viewing" element={<AnnouncementViewing />} />
         <Route path="/not-allowed" element={<Unauthorized />} />
+        <Route path="/notes-view" element={<NotesView />} />
       </Routes>
     </>
   );
