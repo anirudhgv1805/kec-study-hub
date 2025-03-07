@@ -1,44 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { User } from "../types/User";
+import { getFirestore } from "firebase/firestore";
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import app from "../firebase/firebase";
 
-interface UserProfileProps {
-  uid: string;
-}
-
-const UserProfile: React.FC<UserProfileProps> = ({ uid }) => {
+const UserProfile: React.FC = () => {
   const db = getFirestore(app);
 
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { user } = useAuth();
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userDocRef = doc(db, "users", uid);
-        const docSnap = await getDoc(userDocRef);
-
-        if (docSnap.exists()) {
-          setUser(docSnap.data() as User);
-        } else {
-          setError("No such user exists");
-        }
-      } catch (err) {
-        setError("Error fetching user data");
-        console.error("Error fetching user: ", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [uid]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
-
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold">User Profile</h1>

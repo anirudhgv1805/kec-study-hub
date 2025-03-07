@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { login } from "../services/auth";
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
+  const { login, user } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -11,16 +13,25 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { role } = await login(email, password);
-      if (role === "admin") {
-        navigate("/admin-dashboard");
-      } else {
-        navigate("/not-allowed");
-      }
+      await login(email, password);
     } catch (err) {
       setError("Invalid credentials");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      if (user.role === "admin") {
+        navigate("/admin-dashboard");
+      } else if (user.role === "staff") {
+        navigate("/staff-dashboard");
+      } else if (user.role === "student") {
+        navigate("/student-dashboard");
+      } else {
+        navigate("/not-allowed");
+      }
+    }
+  }, [user, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

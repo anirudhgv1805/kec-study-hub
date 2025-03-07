@@ -5,7 +5,6 @@ import app from "../firebase/firebase";
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export var userId :string | null=null;
 export const signUp = async (email: string, password: string, role: "hungerbox" | "ngo") => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
@@ -22,7 +21,6 @@ export const login = async (email: string, password: string) => {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
   const role = await getUserRole(user.uid);
-  userId = user.uid;
   return { user, role };
 };
 
