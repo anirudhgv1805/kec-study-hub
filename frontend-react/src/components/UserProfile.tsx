@@ -4,10 +4,13 @@ import { useAuth } from "../context/AuthContext";
 import app from "../firebase/firebase";
 
 const UserProfile: React.FC = () => {
+  // @ts-ignore
   const db = getFirestore(app);
 
   const { user } = useAuth();
+  // @ts-ignore
   const [loading, setLoading] = useState<boolean>(false);
+  // @ts-ignore
   const [error, setError] = useState<string | null>(null);
 
   if (loading) return <div>Loading...</div>;
